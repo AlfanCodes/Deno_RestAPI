@@ -1,10 +1,13 @@
 // Add DenoTrain module
-import { Application, Router } from "https://deno.land/x/denotrain@v0.4.4/mod.ts";
+import {
+  Application,
+  Router,
+} from "https://deno.land/x/denotrain@v0.4.4/mod.ts";
 // Load quotes
 import { quotes } from "./quotes.ts";
 
 // Create a new application
-const app = new Application({ hostname: "127.0.0.1", port: 3000 });
+const app = new Application({ hostname: "192.168.100.5", port: 3000 });
 // Optional: Generate router and hook routes to it
 const router = new Router();
 
@@ -12,17 +15,17 @@ const router = new Router();
 app.use("/api", router);
 
 app.get("/", context => {
-    return "Hello from AlfanCodes";
+  return "Hello from AlfanCodes";
 });
 
 // url will be at http://127.0.0.1:3000/api/quotes
 router.get("/quotes", context => {
-    return { quotes: quotes };
+  return { quotes: quotes };
 });
 
 // Single quote, url will be at http://127.0.0.1:3000/api/quote
 router.get("/quote", context => {
-    return { quote: quotes[Math.floor(Math.random() * quotes.length)] };
+  return { quote: quotes[Math.floor(Math.random() * quotes.length)] };
 });
 
 await app.run();
